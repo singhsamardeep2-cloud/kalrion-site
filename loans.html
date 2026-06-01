@@ -15,7 +15,7 @@
   <body>
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Kalrion home">
-        <img class="brand-logo" src="assets/kalrion-logo.png" alt="Kalrion Capital logo" />
+        <img class="brand-logo" src="assets/kalrion-logo.svg" alt="Kalrion Capital logo" />
         <span>
           <strong>Kalrion Capital</strong>
           <small>Insurance | Loans | Demat</small>
@@ -27,6 +27,7 @@
         <a href="loans.html" class="active" style="color: #ffffff;">Loans</a>
         <a href="sip.html">SIP Planner</a>
         <a href="gold.html">Gold Tracker</a>
+        <a href="tax.html">Tax Planner</a>
         <a href="index.html#about">About</a>
         <a href="index.html#contact">Contact</a>
       </nav>
@@ -89,7 +90,7 @@
               <div class="input-group">
                 <span class="input-label">Loan Amount (₹)</span>
                 <div class="range-slider-wrapper">
-                  <input type="range" id="loan-amount-slider" min="100000" max="20000000" step="50000" value="5000000" />
+                  <input type="range" id="loan-amount-slider" min="100000" max="20000000" step="1" value="5000000" />
                   <div class="slider-value-box">
                     <input type="text" id="loan-amount-text" value="50,00,000" />
                   </div>
@@ -100,7 +101,7 @@
               <div class="input-group">
                 <span class="input-label">Interest Rate (% p.a.)</span>
                 <div class="range-slider-wrapper">
-                  <input type="range" id="loan-rate-slider" min="5" max="20" step="0.05" value="8.5" />
+                  <input type="range" id="loan-rate-slider" min="5" max="20" step="0.01" value="8.5" />
                   <div class="slider-value-box">
                     <input type="text" id="loan-rate-text" value="8.5" />
                   </div>

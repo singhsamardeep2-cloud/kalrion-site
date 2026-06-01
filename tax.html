@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Old vs New Income Tax Calculator FY 2026-27 | Kalrion Capital</title>
+    <meta
+      name="description"
+      content="Compare tax liabilities under the Old and New tax regimes for FY 2026-27 (AY 2027-28) with standard deductions, 80C, 80D, home loan interest, and HRA."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Kalrion home">
+        <img class="brand-logo" src="assets/kalrion-logo.svg" alt="Kalrion Capital logo" />
+        <span>
+          <strong>Kalrion Capital</strong>
+          <small>Insurance | Loans | Demat</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html#health">Health</a>
+        <a href="index.html#motor">Motor</a>
+        <a href="loans.html">Loans</a>
+        <a href="sip.html">SIP Planner</a>
+        <a href="gold.html">Gold Tracker</a>
+        <a href="tax.html" class="active" style="color: #ffffff;">Tax Planner</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <a class="header-cta" href="tel:+918447842244">Call now</a>
+    </header>
+
+    <main id="top">
+      <section class="page-banner">
+        <p class="eyebrow" style="color: var(--accent);">Tax Planning & Advisory</p>
+        <h1>Income Tax Calculator</h1>
+        <p>
+          Compare your estimated tax liability under the **Old Regime** and **New Regime (Default)** for FY 2026-27 (AY 2027-28).
+        </p>
+      </section>
+
+      <section class="section" style="padding-top: 40px; padding-bottom: 40px;">
+        <div class="interactive-calculator tax-calculator" style="margin-top: 0;">
+          <div class="calc-header" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark));">
+            <h3 style="color: var(--accent-light); margin: 0 0 6px 0;">Compare Old vs New Tax Regimes</h3>
+            <p style="margin: 0; color: #c9ded5;">Enter your income and investments below to see which regime saves you more money.</p>
+          </div>
+          <div class="calc-body" style="grid-template-columns: 1.1fr 0.9fr;">
+            
+            <!-- Inputs Column -->
+            <div class="calc-inputs" style="padding-right: 10px;">
+              <!-- Salaried Option Toggle -->
+              <div class="input-group" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; background: var(--cream); padding: 12px 16px; border-radius: var(--radius-sm);">
+                <div>
+                  <span class="input-label" style="margin-bottom: 2px; font-weight: 700; color: var(--primary-dark);">Salaried Employee?</span>
+                  <span style="font-size: 0.75rem; color: var(--muted); display: block;">Applies standard deduction (₹75,000 for New, ₹50,000 for Old)</span>
+                </div>
+                <label class="switch-container" style="position: relative; display: inline-block; width: 48px; height: 26px; margin-left: 10px;">
+                  <input type="checkbox" id="tax-salaried" checked style="opacity: 0; width: 0; height: 0;" />
+                  <span class="switch-slider" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .3s; border-radius: 34px;"></span>
+                </label>
+              </div>
+
+              <!-- Gross Annual Income -->
+              <div class="input-group">
+                <span class="input-label">Gross Annual Income (₹)</span>
+                <div class="range-slider-wrapper">
+                  <input type="range" id="tax-income-slider" min="200000" max="10000000" step="1" value="1200000" />
+                  <div class="slider-value-box">
+                    <input type="text" id="tax-income-text" value="12,00,000" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Collapsible Deductions for Old Regime -->
+              <div class="tax-deductions-accordion" style="margin-top: 25px; border: 1.5px solid var(--line); border-radius: var(--radius-md); overflow: hidden; background: var(--paper);">
+                <button type="button" class="accordion-trigger" style="width: 100%; padding: 14px 20px; background: var(--cream); border: none; text-align: left; font-weight: 700; font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                  <span>Investments & Deductions (Old Regime)</span>
+                  <span class="accordion-icon" style="transition: transform 0.25s; font-size: 1.25rem;">+</span>
+                </button>
+                <div class="accordion-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding: 0 20px;">
+                  <div style="padding: 20px 0 10px 0; display: flex; flex-direction: column; gap: 16px;">
+                    
+                    <!-- Section 80C -->
+                    <div class="input-group">
+                      <span class="input-label">Section 80C (PPF, ELSS, EPF, LIC) (₹) <small style="color: var(--muted); font-weight: normal;">- Max 1.5L</small></span>
+                      <div class="range-slider-wrapper">
+                        <input type="range" id="tax-80c-slider" min="0" max="150000" step="1" value="150000" />
+                        <div class="slider-value-box">
+                          <input type="text" id="tax-80c-text" value="1,50,000" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Section 80D -->
+                    <div class="input-group">
+                      <span class="input-label">Section 80D (Health Insurance Premium) (₹) <small style="color: var(--muted); font-weight: normal;">- Max 1L</small></span>
+                      <div class="range-slider-wrapper">
+                        <input type="range" id="tax-80d-slider" min="0" max="100000" step="1" value="25000" />
+                        <div class="slider-value-box">
+                          <input type="text" id="tax-80d-text" value="25,000" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Home Loan Interest Sec 24(b) -->
+                    <div class="input-group">
+                      <span class="input-label">Interest on Home Loan (Sec 24b) (₹) <small style="color: var(--muted); font-weight: normal;">- Max 2L</small></span>
+                      <div class="range-slider-wrapper">
+                        <input type="range" id="tax-24b-slider" min="0" max="200000" step="1" value="0" />
+                        <div class="slider-value-box">
+                          <input type="text" id="tax-24b-text" value="0" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Additional NPS Sec 80CCD(1B) -->
+                    <div class="input-group">
+                      <span class="input-label">Additional NPS Contribution (80CCD 1B) (₹) <small style="color: var(--muted); font-weight: normal;">- Max 50K</small></span>
+                      <div class="range-slider-wrapper">
+                        <input type="range" id="tax-nps-slider" min="0" max="50000" step="1" value="0" />
+                        <div class="slider-value-box">
+                          <input type="text" id="tax-nps-text" value="0" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- HRA / Rent Exemption -->
+                    <div class="input-group">
+                      <span class="input-label">HRA Exemption / Rent Paid Exemption (₹)</span>
+                      <div class="range-slider-wrapper">
+                        <input type="range" id="tax-hra-slider" min="0" max="500000" step="1" value="0" />
+                        <div class="slider-value-box">
+                          <input type="text" id="tax-hra-text" value="0" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Other Exemptions & Deductions -->
+                    <div class="input-group" style="margin-bottom: 10px;">
+                      <span class="input-label">Other Allowances & Deductions (LTA, 80G, etc.) (₹)</span>
+                      <div class="range-slider-wrapper">
+                        <input type="range" id="tax-other-slider" min="0" max="200000" step="1" value="0" />
+                        <div class="slider-value-box">
+                          <input type="text" id="tax-other-text" value="0" />
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <!-- Deductions for New Regime -->
+              <div class="tax-deductions-accordion" style="margin-top: 15px; border: 1.5px solid var(--line); border-radius: var(--radius-md); overflow: hidden; background: var(--paper);">
+                <button type="button" class="accordion-trigger2" style="width: 100%; padding: 14px 20px; background: var(--cream); border: none; text-align: left; font-weight: 700; font-family: 'Outfit', sans-serif; font-size: 0.95rem; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                  <span>Investments & Deductions (New Regime)</span>
+                  <span class="accordion-icon2" style="transition: transform 0.25s; font-size: 1.25rem;">+</span>
+                </button>
+                <div class="accordion-content2" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding: 0 20px;">
+                  <div style="padding: 20px 0 10px 0; display: flex; flex-direction: column; gap: 16px;">
+                    
+                    <!-- Employer NPS 80CCD(2) -->
+                    <div class="input-group" style="margin-bottom: 10px;">
+                      <span class="input-label">Employer NPS Contribution (Sec 80CCD 2) (₹)</span>
+                      <div class="range-slider-wrapper">
+                        <input type="range" id="tax-nps2-slider" min="0" max="250000" step="1" value="0" />
+                        <div class="slider-value-box">
+                          <input type="text" id="tax-nps2-text" value="0" />
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Results Column -->
+            <div class="calc-results" style="background: var(--cream);">
+              <div class="result-card">
+                <!-- Recommended Regime Banner -->
+                <div id="tax-recommendation-banner" style="background: var(--primary-dark); padding: 15px; border-radius: var(--radius-sm); color: #ffffff; text-align: center; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 22px; font-size: 1.05rem; border-left: 5px solid var(--accent);">
+                  New Regime is better! You save ₹X.
+                </div>
+
+                <span class="result-title" style="margin-bottom: 15px;">Regime Comparison</span>
+
+                <!-- side by side table -->
+                <table class="tax-comparison-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88rem; font-family: 'Plus Jakarta Sans', sans-serif;">
+                  <thead>
+                    <tr style="border-bottom: 2px solid var(--line); color: var(--primary-dark); font-weight: 800;">
+                      <th style="padding: 8px 4px; text-align: left; width: 45%;">Parameter</th>
+                      <th style="padding: 8px 4px; text-align: right; width: 27%;">Old Regime</th>
+                      <th style="padding: 8px 4px; text-align: right; width: 28%;">New Regime</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid rgba(10, 77, 52, 0.08);">
+                      <td style="padding: 8px 4px; text-align: left; color: var(--muted);">Gross Income</td>
+                      <td style="padding: 8px 4px; text-align: right; font-weight: 600;" id="table-old-gross">₹ 12,00,000</td>
+                      <td style="padding: 8px 4px; text-align: right; font-weight: 600;" id="table-new-gross">₹ 12,00,000</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(10, 77, 52, 0.08);">
+                      <td style="padding: 8px 4px; text-align: left; color: var(--muted);">Deductions</td>
+                      <td style="padding: 8px 4px; text-align: right; font-weight: 600; color: var(--error);" id="table-old-ded">- ₹ 2,25,000</td>
+                      <td style="padding: 8px 4px; text-align: right; font-weight: 600; color: var(--error);" id="table-new-ded">- ₹ 75,000</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(10, 77, 52, 0.08); background: rgba(10, 77, 52, 0.03);">
+                      <td style="padding: 8px 4px; text-align: left; color: var(--primary-dark); font-weight: 700;">Taxable Income</td>
+                      <td style="padding: 8px 4px; text-align: right; font-weight: 700; color: var(--primary-dark);" id="table-old-taxable">₹ 9,75,000</td>
+                      <td style="padding: 8px 4px; text-align: right; font-weight: 700; color: var(--primary-dark);" id="table-new-taxable">₹ 11,25,000</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(10, 77, 52, 0.08);">
+                      <td style="padding: 8px 4px; text-align: left; color: var(--muted);">Slab Tax</td>
+                      <td style="padding: 8px 4px; text-align: right;" id="table-old-slab-tax">₹ 1,07,500</td>
+                      <td style="padding: 8px 4px; text-align: right;" id="table-new-slab-tax">₹ 77,500</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(10, 77, 52, 0.08);">
+                      <td style="padding: 8px 4px; text-align: left; color: var(--muted);">Sec 87A Rebate</td>
+                      <td style="padding: 8px 4px; text-align: right; color: var(--success);" id="table-old-rebate">₹ 0</td>
+                      <td style="padding: 8px 4px; text-align: right; color: var(--success);" id="table-new-rebate">- ₹ 60,000</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid rgba(10, 77, 52, 0.08);">
+                      <td style="padding: 8px 4px; text-align: left; color: var(--muted);">Cess (4%)</td>
+                      <td style="padding: 8px 4px; text-align: right;" id="table-old-cess">₹ 4,300</td>
+                      <td style="padding: 8px 4px; text-align: right;" id="table-new-cess">₹ 700</td>
+                    </tr>
+                    <tr style="border-bottom: 2px solid var(--primary-dark); font-size: 0.95rem; background: var(--accent-light);">
+                      <td style="padding: 10px 4px; text-align: left; color: var(--primary-dark); font-weight: 800;">Net Tax Payable</td>
+                      <td style="padding: 10px 4px; text-align: right; font-weight: 800; color: var(--primary-dark);" id="table-old-net-tax">₹ 1,11,800</td>
+                      <td style="padding: 10px 4px; text-align: right; font-weight: 800; color: var(--primary-dark);" id="table-new-net-tax">₹ 18,200</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- Chart.js comparative bar chart -->
+                <div class="chart-wrapper" style="max-height: 200px; height: 180px; margin-bottom: 15px;">
+                  <canvas id="taxChart"></canvas>
+                </div>
+
+                <button class="button primary calc-cta" id="tax-whatsapp-btn" style="background: var(--primary-dark); margin-top: 10px;">
+                  Consult Tax Filing & Planning on WhatsApp
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Slab Rules Panel -->
+        <div class="detail-panel" style="margin-top: 30px;">
+          <h3>Income Tax Slabs & Rules (FY 2026-27 / AY 2027-28)</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 15px;" id="tax-rules-grid">
+            
+            <div style="background: var(--panel); padding: 20px; border-radius: var(--radius-md); border: 1.5px solid var(--line);">
+              <h4 style="color: var(--primary); margin-top: 0; font-family: 'Outfit', sans-serif;">New Tax Regime (Default)</h4>
+              <ul style="grid-template-columns: 1fr; padding-left: 16px; font-size: 0.88rem; line-height: 1.6;">
+                <li><strong>Tax Slabs:</strong> Up to 4L (Nil), 4-8L (5%), 8-12L (10%), 12-16L (15%), 16-20L (20%), 20-24L (25%), Above 24L (30%).</li>
+                <li><strong>Sec 87A Rebate:</strong> Taxable income up to ₹12 lakh is fully rebate-eligible (making it tax-free).</li>
+                <li><strong>Deductions allowed:</strong> Standard deduction of ₹75,000 for salaried employees and Sec 80CCD(2) employer NPS contribution. Most other deductions (80C, 80D, HRA, Sec 24b) are barred.</li>
+              </ul>
+            </div>
+
+            <div style="background: var(--panel); padding: 20px; border-radius: var(--radius-md); border: 1.5px solid var(--line);">
+              <h4 style="color: var(--accent-dark); margin-top: 0; font-family: 'Outfit', sans-serif;">Old Tax Regime (Optional)</h4>
+              <ul style="grid-template-columns: 1fr; padding-left: 16px; font-size: 0.88rem; line-height: 1.6;">
+                <li><strong>Tax Slabs:</strong> Up to 2.5L (Nil), 2.5-5L (5%), 5-10L (20%), Above 10L (30%).</li>
+                <li><strong>Sec 87A Rebate:</strong> Taxable income up to ₹5 lakh is fully rebate-eligible (tax-free).</li>
+                <li><strong>Deductions allowed:</strong> Standard deduction of ₹50,000 for salaried employees, 80C (up to 1.5L), 80D (health premium), Sec 24(b) (home loan interest up to 2L), HRA exemptions, etc.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Kalrion Capital</strong>
+        <p>Practical financial advisory, insurance, lending, and tax planning guidance for Indian households.</p>
+      </div>
+      <p>
+        Income tax calculations are based on Budget 2025 proposals for Financial Year 2026-27 (Assessment Year 2027-28). Surcharges, cess, rebates, and deductions are computed under standard tax laws. Tax liability can vary depending on other factors. Please consult a Chartered Accountant (CA) or certified tax professional for actual filing advice.
+      </p>
+    </footer>
+
+    <div class="sticky-actions" aria-label="Quick contact actions">
+      <a class="sticky-call" href="tel:+918447842244">Call now</a>
+      <a class="sticky-whatsapp" href="https://wa.me/918447842244">WhatsApp enquiry</a>
+    </div>
+
+    <script src="tax.js"></script>
+  </body>
+</html>

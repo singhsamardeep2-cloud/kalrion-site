@@ -1336,4 +1336,45 @@ textarea {
   background: #fbfcfb;
 }
 
+/* Custom Switch Toggle */
+.switch-container input:checked + .switch-slider {
+  background-color: var(--primary);
+}
+
+.switch-container .switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.switch-container input:checked + .switch-slider:before {
+  transform: translateX(22px);
+}
+
+/* Accordion Active States */
+.tax-deductions-accordion.active .accordion-icon,
+.tax-deductions-accordion.active .accordion-icon2 {
+  transform: rotate(45deg);
+}
+
+.tax-comparison-table th {
+  font-family: 'Outfit', sans-serif;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.tax-comparison-table td, 
+.tax-comparison-table th {
+  padding: 10px 8px !important;
+}
+
+
 
