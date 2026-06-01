@@ -135,6 +135,87 @@
             <p>Increase protection without blindly increasing premium on the base policy.</p>
           </article>
         </div>
+
+        <!-- Interactive Health Advisor -->
+        <div class="interactive-calculator health-calculator">
+          <div class="calc-header">
+            <h3>Calculate Recommended Health Cover</h3>
+            <p>Get a quick, personalized cover size and safety checklist before you talk to an advisor.</p>
+          </div>
+          <div class="calc-body">
+            <div class="calc-inputs">
+              <div class="input-group">
+                <span class="input-label">Who do you want to cover?</span>
+                <div class="radio-tiles">
+                  <label class="tile-option">
+                    <input type="radio" name="health-members" value="individual" checked />
+                    <span class="tile-content">
+                      <strong class="tile-title">Self Only</strong>
+                      <span class="tile-desc">Individual policy</span>
+                    </span>
+                  </label>
+                  <label class="tile-option">
+                    <input type="radio" name="health-members" value="couple" />
+                    <span class="tile-content">
+                      <strong class="tile-title">Self + Spouse</strong>
+                      <span class="tile-desc">Husband & wife</span>
+                    </span>
+                  </label>
+                  <label class="tile-option">
+                    <input type="radio" name="health-members" value="family" />
+                    <span class="tile-content">
+                      <strong class="tile-title">Family Floater</strong>
+                      <span class="tile-desc">Self, spouse & kids</span>
+                    </span>
+                  </label>
+                  <label class="tile-option">
+                    <input type="radio" name="health-members" value="parents" />
+                    <span class="tile-content">
+                      <strong class="tile-title">Parents Cover</strong>
+                      <span class="tile-desc">Senior citizens</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <span class="input-label">Oldest member's age group</span>
+                <select id="health-age" class="calc-select">
+                  <option value="young">18 to 35 years</option>
+                  <option value="adult">36 to 50 years</option>
+                  <option value="middle">51 to 60 years</option>
+                  <option value="senior">Above 60 years</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <span class="input-label">Where do you live?</span>
+                <select id="health-city" class="calc-select">
+                  <option value="tier1">Metro / Tier 1 (Delhi, Mumbai, Bengaluru, etc.)</option>
+                  <option value="tier2">Tier 2 / Non-Metro City</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="calc-results">
+              <div class="result-card">
+                <span class="result-title">Recommended Safety Net</span>
+                <div class="result-value" id="health-recommended-cover">₹ 10 Lakhs</div>
+                <div class="result-breakdown" id="health-cover-breakdown">
+                  Base Policy: ₹5 Lakhs + Super Top-up: ₹5 Lakhs
+                </div>
+                <ul class="result-tips" id="health-tips">
+                  <li>Choose policies with "No Room Rent Capping" for metropolitan hospitals.</li>
+                  <li>Check waiting periods for pre-existing conditions like diabetes/BP.</li>
+                </ul>
+                <button class="button primary calc-cta" id="health-calc-whatsapp">
+                  Discuss this Recommendation on WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="detail-panel">
           <h3>What we help you check before buying</h3>
           <ul>
@@ -188,6 +269,76 @@
             <span>Send your current policy and we help you understand what should be improved.</span>
           </div>
         </div>
+
+        <!-- Interactive Motor Planner -->
+        <div class="interactive-calculator motor-calculator" style="grid-column: 1 / -1;">
+          <div class="calc-header">
+            <h3>Configure Motor Insurance Add-Ons</h3>
+            <p>Select your vehicle age and preferences to discover which covers protect your wallet.</p>
+          </div>
+          <div class="calc-body">
+            <div class="calc-inputs">
+              <div class="input-group">
+                <span class="input-label">Vehicle age</span>
+                <select id="motor-age" class="calc-select">
+                  <option value="new">Brand New (Under 1 year)</option>
+                  <option value="mid" selected>1 to 5 years old</option>
+                  <option value="old">Above 5 years old</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <span class="input-label">Do you want Zero Depreciation cover?</span>
+                <div class="radio-tiles">
+                  <label class="tile-option">
+                    <input type="radio" name="motor-zerodep" value="yes" checked />
+                    <span class="tile-content">
+                      <strong class="tile-title">Yes, definitely</strong>
+                      <span class="tile-desc">Cover bumper-to-bumper cost</span>
+                    </span>
+                  </label>
+                  <label class="tile-option">
+                    <input type="radio" name="motor-zerodep" value="no" />
+                    <span class="tile-content">
+                      <strong class="tile-title">No</strong>
+                      <span class="tile-desc">Pay depreciation out of pocket</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <span class="input-label">Do you have No Claim Bonus (NCB)?</span>
+                <select id="motor-ncb" class="calc-select">
+                  <option value="0">No, I made a claim last year (0%)</option>
+                  <option value="20" selected>Yes, 1 claim-free year (20%)</option>
+                  <option value="25">Yes, 2 claim-free years (25%)</option>
+                  <option value="35">Yes, 3 claim-free years (35%)</option>
+                  <option value="45">Yes, 4 claim-free years (45%)</option>
+                  <option value="50">Yes, 5+ claim-free years (50%)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="calc-results">
+              <div class="result-card">
+                <span class="result-title">Recommended Protection Bundle</span>
+                <div class="result-value" id="motor-recommended-title">Standard Bundle</div>
+                <div class="result-breakdown" id="motor-ncb-savings">
+                  Expected NCB Discount: 20%
+                </div>
+                <ul class="result-tips" id="motor-addons-list">
+                  <li><strong>Zero Depreciation:</strong> Absolutely recommended for vehicles under 5 years.</li>
+                  <li><strong>Engine Protection:</strong> Protects against water ingression during floods.</li>
+                </ul>
+                <button class="button primary calc-cta" id="motor-calc-whatsapp">
+                  Discuss this Bundle on WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="detail-panel motor-detail">
           <h3>Motor policy points customers often miss</h3>
           <ul>
