@@ -1,15 +1,23 @@
-const buildMailto = (data) => {
-  const subject = encodeURIComponent(`Insurance enquiry from ${data.get("name") || "Kalrion website"}`);
-  const body = encodeURIComponent(
-    [
-      `Name: ${data.get("name") || ""}`,
-      `Phone: ${data.get("phone") || ""}`,
-      `Insurance need: ${data.get("need") || ""}`,
-      `Message: ${data.get("message") || ""}`,
-    ].join("\n")
-  );
+const whatsappNumber = "918447842244";
 
-  return `mailto:hello@kalrion.in?subject=${subject}&body=${body}`;
+const buildWhatsAppUrl = (data) => {
+  const name = data.get("name") || "";
+  const phone = data.get("phone") || "";
+  const need = data.get("need") || "Insurance guidance";
+  const message = data.get("message") || "";
+
+  const text = [
+    "Hi Kalrion Capital, I want help with insurance.",
+    "",
+    `Name: ${name}`,
+    `Phone: ${phone}`,
+    `Need: ${need}`,
+    message ? `Message: ${message}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 };
 
 const handleForm = (formId, noteId) => {
@@ -19,8 +27,8 @@ const handleForm = (formId, noteId) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new FormData(form);
-    note.textContent = "Opening an email draft with your details.";
-    window.location.href = buildMailto(data);
+    note.textContent = "Opening WhatsApp with your enquiry details.";
+    window.location.href = buildWhatsAppUrl(data);
   });
 };
 

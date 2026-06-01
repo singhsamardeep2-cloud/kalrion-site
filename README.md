@@ -6,16 +6,11 @@ This is a simple static website for Kalrion.in focused on health and motor insur
 
 - `index.html` - page content, sections, forms, and SEO title/description.
 - `styles.css` - visual design, layout, colors, and mobile responsiveness.
-- `script.js` - turns the contact forms into an email draft.
+- `script.js` - turns the contact forms into a pre-filled WhatsApp enquiry.
 - `assets/insurance-hero.svg` - homepage advisory visual.
 - `assets/kalrion-logo.png` - Kalrion Capital logo used in the header.
+- `CNAME` - tells GitHub Pages to use `kalrion.in`.
 
 ## Before Publishing
 
-Update these placeholders in `index.html`:
-
-- `hello@kalrion.in`
-- `Phone: Add your number`
-- Footer license/disclosure text
-
-For an insurance business, add your correct registration, license, insurer-partner, and compliance details before public launch.
+Before active promotion, confirm the email address and add any applicable IRDAI, POSP, insurer-partner, or license details required for your exact business arrangement.
