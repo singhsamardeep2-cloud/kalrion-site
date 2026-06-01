@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin CRM Console | Kalrion Capital</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* Page-specific overrides for Admin Console */
+      .admin-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+      .login-panel-card {
+        max-width: 420px;
+        margin: 80px auto;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+      }
+      .admin-dashboard {
+        display: none; /* Shown after auth */
+      }
+      .admin-metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+        margin-bottom: 30px;
+      }
+      .admin-metrics-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        padding: 20px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        flex-direction: column;
+      }
+      .admin-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 0.9fr;
+        gap: 24px;
+      }
+      .crm-leads-section {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+      }
+      .crm-charts-section {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .crm-chart-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        padding: 24px;
+      }
+      .crm-table-wrapper {
+        overflow-x: auto;
+        margin-top: 15px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+      }
+      .crm-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 0.82rem;
+      }
+      .crm-table th,
+      .crm-table td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      .crm-table th {
+        background: var(--cream);
+        color: var(--primary-dark);
+        font-weight: 700;
+        font-family: 'Outfit', sans-serif;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        letter-spacing: 0.05em;
+      }
+      .crm-table tr:hover td {
+        background: #fcfdfe;
+      }
+      .crm-filters {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+      .crm-filter-input {
+        padding: 8px 12px;
+        border: 1.5px solid var(--line);
+        border-radius: var(--radius-sm);
+        font-size: 0.85rem;
+        font-family: inherit;
+        outline: none;
+      }
+      .crm-filter-input:focus {
+        border-color: var(--primary);
+      }
+      .status-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 99px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .status-badge.new {
+        background: #e1f5fe;
+        color: #0288d1;
+      }
+      .status-badge.contacted {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+      .status-btn {
+        background: none;
+        border: 1px solid var(--line);
+        color: var(--primary);
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .status-btn:hover {
+        background: var(--cream);
+        border-color: var(--primary);
+      }
+      
+      @media (max-width: 1024px) {
+        .admin-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .admin-metrics {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 480px) {
+        .admin-metrics {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Block -->
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Kalrion home">
+        <img class="brand-logo" src="assets/kalrion-logo.svg" alt="Kalrion Capital logo" />
+        <span>
+          <strong>Kalrion Capital</strong>
+          <small>CRM console</small>
+        </span>
+      </a>
+      <div id="admin-user-info" style="display: none; align-items: center; gap: 15px; color: #ffffff;">
+        <span style="font-size: 0.88rem; font-weight: 600; color: var(--accent-light);">🔑 Logged in as Administrator</span>
+        <button class="button secondary" id="admin-logout-btn" style="min-height: auto; padding: 6px 12px; font-size: 0.78rem; border-color: rgba(255,255,255,0.4); color: #ffffff;">Log out</button>
+      </div>
+    </header>
+
+    <main class="admin-container">
+      
+      <!-- Login View -->
+      <section id="login-section" class="login-panel-card">
+        <div style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); padding: 24px; text-align: center; border-bottom: 3px solid var(--accent);">
+          <h3 style="color: var(--accent-light); margin: 0; font-family: 'Outfit', sans-serif;">Admin CRM Login</h3>
+          <p style="margin: 5px 0 0 0; color: #c9ded5; font-size: 0.85rem;">Access customer leads and insights panel</p>
+        </div>
+        <form id="admin-login-form" style="padding: 24px; display: flex; flex-direction: column; gap: 16px;">
+          <div class="input-group" style="display: block;">
+            <label class="input-label" for="login-username">Username</label>
+            <input type="text" id="login-username" class="crm-filter-input" style="width: 100%; box-sizing: border-box;" required placeholder="Enter username" />
+          </div>
+          <div class="input-group" style="display: block;">
+            <label class="input-label" for="login-password">Password</label>
+            <input type="password" id="login-password" class="crm-filter-input" style="width: 100%; box-sizing: border-box;" required placeholder="Enter password" />
+          </div>
+          <div id="login-error-msg" style="color: var(--error); font-size: 0.8rem; font-weight: 700; display: none; text-align: center; margin-top: 5px;">
+            ❌ Invalid username or password! Please try again.
+          </div>
+          <button type="submit" class="button primary" style="width: 100%; margin-top: 10px; background: var(--primary-dark);">Authenticate Access</button>
+        </form>
+      </section>
+
+      <!-- Dashboard View -->
+      <section id="dashboard-section" class="admin-dashboard">
+        
+        <!-- Welcome banner -->
+        <div style="background: var(--cream); padding: 16px 24px; border-radius: var(--radius-md); border: 1.5px solid var(--line); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h2 style="margin: 0; font-family: 'Outfit', sans-serif; color: var(--primary-dark); font-size: 1.4rem;">Lead Management Console</h2>
+            <p style="margin: 2px 0 0 0; color: var(--muted); font-size: 0.85rem;">Track real-time customer calculator conversions and link enquiries.</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="button secondary" id="crm-export-btn" style="min-height: auto; padding: 8px 16px; font-size: 0.85rem;">📥 Export CSV Sheet</button>
+            <button class="button secondary" id="crm-clear-btn" style="min-height: auto; padding: 8px 16px; font-size: 0.85rem; border-color: var(--error); color: var(--error);">🗑️ Reset CRM Data</button>
+          </div>
+        </div>
+
+        <!-- Metrics summary row -->
+        <div class="admin-metrics">
+          <div class="admin-metrics-card">
+            <span style="font-size: 0.72rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Total Leads</span>
+            <strong style="font-size: 2rem; color: var(--primary-dark); font-weight: 800; margin-top: 5px;" id="metric-total-leads">0</strong>
+            <small style="color: var(--primary-light); font-weight: 700; font-size: 0.78rem; margin-top: 2px;">Database size</small>
+          </div>
+          <div class="admin-metrics-card">
+            <span style="font-size: 0.72rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">WhatsApp Leads</span>
+            <strong style="font-size: 2rem; color: var(--primary-dark); font-weight: 800; margin-top: 5px;" id="metric-wa-leads">0</strong>
+            <small style="color: var(--success); font-weight: 700; font-size: 0.78rem; margin-top: 2px;" id="metric-wa-percent">0% of total</small>
+          </div>
+          <div class="admin-metrics-card">
+            <span style="font-size: 0.72rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Phone Calls</span>
+            <strong style="font-size: 2rem; color: var(--primary-dark); font-weight: 800; margin-top: 5px;" id="metric-call-leads">0</strong>
+            <small style="color: var(--accent-dark); font-weight: 700; font-size: 0.78rem; margin-top: 2px;" id="metric-call-percent">0% of total</small>
+          </div>
+          <div class="admin-metrics-card">
+            <span style="font-size: 0.72rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em;">Popular Source</span>
+            <strong style="font-size: 1.15rem; color: var(--primary-dark); font-weight: 800; margin-top: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="metric-popular-source">N/A</strong>
+            <small style="color: var(--muted); font-weight: 700; font-size: 0.78rem; margin-top: 2px;">Highest conversion rate</small>
+          </div>
+        </div>
+
+        <!-- Main Workspace Grid -->
+        <div class="admin-grid">
+          
+          <!-- Left: Searchable Lead Logs -->
+          <div class="crm-leads-section">
+            <h3 style="margin-top: 0; font-family: 'Outfit', sans-serif; color: var(--primary-dark); font-size: 1.15rem; border-bottom: 2px solid var(--cream); padding-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <span>Enquiry Feed Log</span>
+              <span id="crm-active-leads-count" style="font-size: 0.78rem; background: var(--primary); color: #fff; padding: 2px 8px; border-radius: 99px;">0 matches</span>
+            </h3>
+            
+            <!-- Filters Toolbar -->
+            <div class="crm-filters">
+              <input type="text" id="crm-search-filter" class="crm-filter-input" style="flex-grow: 1; min-width: 180px;" placeholder="🔍 Search by name or details..." />
+              <select id="crm-source-filter" class="crm-filter-input">
+                <option value="all">All Pages</option>
+                <option value="Home Page">Home Page</option>
+                <option value="Loan EMI Calculator">Loans Page</option>
+                <option value="SIP Growth Planner">SIP Page</option>
+                <option value="Gold Tracker">Gold Page</option>
+                <option value="Tax Planner">Tax Page</option>
+              </select>
+              <select id="crm-action-filter" class="crm-filter-input">
+                <option value="all">All Actions</option>
+                <option value="WhatsApp Click">WhatsApp Click</option>
+                <option value="Call Click">Call Click</option>
+                <option value="Form Submit">Form Submit</option>
+              </select>
+            </div>
+
+            <!-- Leads Table -->
+            <div class="crm-table-wrapper">
+              <table class="crm-table" id="leads-table">
+                <thead>
+                  <tr>
+                    <th style="width: 15%;">Date & Time</th>
+                    <th style="width: 25%;">Page Source</th>
+                    <th style="width: 15%;">Action</th>
+                    <th style="width: 30%;">Details / Parameters</th>
+                    <th style="width: 15%;">Status / Update</th>
+                  </tr>
+                </thead>
+                <tbody id="leads-table-body">
+                  <!-- Dynamically populated via JS -->
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- Right: Visual Analytics -->
+          <div class="crm-charts-section">
+            
+            <!-- Chart 1: Source Split -->
+            <div class="crm-chart-card">
+              <h4 style="margin: 0 0 12px 0; font-family: 'Outfit', sans-serif; color: var(--primary-dark);">Lead Sources Breakup</h4>
+              <div style="height: 180px; position: relative;">
+                <canvas id="sourceSplitChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 2: Actions Timeline -->
+            <div class="crm-chart-card">
+              <h4 style="margin: 0 0 12px 0; font-family: 'Outfit', sans-serif; color: var(--primary-dark);">Daily Event Trends</h4>
+              <div style="height: 180px; position: relative;">
+                <canvas id="timelineChart"></canvas>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer class="site-footer" style="margin-top: 80px;">
+      <div>
+        <strong>Kalrion Capital</strong>
+        <p>Internal CRM Admin panel. Secure data access only.</p>
+      </div>
+    </footer>
+
+    <script src="crm-logger.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

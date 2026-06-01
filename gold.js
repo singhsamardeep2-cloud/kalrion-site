@@ -218,6 +218,15 @@ const setupBindings = () => {
       const valueNow = document.getElementById('gold-current-value').textContent;
       const growth = document.getElementById('res-gold-growth').textContent;
 
+      // Log Lead to CRM
+      if (window.logLead) {
+        window.logLead(
+          "Gold Tracker",
+          "WhatsApp Click",
+          `Year: ${year} | Capital: ${capital} | Current Value: ${valueNow} | Growth: ${growth}`
+        );
+      }
+
       const text = [
         "Hi Kalrion Capital,",
         `I computed my gold investment compound growth starting in year *${year}* on your website.`,

@@ -351,6 +351,15 @@ const setupSliders = () => {
       const bannerText = document.getElementById('tax-recommendation-banner').textContent.trim();
       const recommendedRegime = bannerText.includes("New") ? "New Regime" : bannerText.includes("Old") ? "Old Regime" : "Equally Beneficial";
 
+      // Log Lead to CRM
+      if (window.logLead) {
+        window.logLead(
+          "Tax Planner",
+          "WhatsApp Click",
+          `Income: ${grossIncome} | Recommended: ${recommendedRegime} | Net Tax New: ${newTax} | Net Tax Old: ${oldTax}`
+        );
+      }
+
       const text = [
         "Hi Kalrion Capital,",
         "I compared the Old vs New Tax Regimes on your website.",

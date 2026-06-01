@@ -222,6 +222,15 @@ const setupBindings = () => {
       const gain = document.getElementById('res-sip-gain').textContent;
       const total = document.getElementById('sip-total-value').textContent;
 
+      // Log Lead to CRM
+      if (window.logLead) {
+        window.logLead(
+          "SIP Growth Planner",
+          "WhatsApp Click",
+          `Monthly SIP: ${amount} | Return Rate: ${rate}% | Duration: ${term} Years | Future Value: ${total}`
+        );
+      }
+
       const text = [
         "Hi Kalrion Capital,",
         "I calculated my Mutual Fund SIP compounding projections on your website.",

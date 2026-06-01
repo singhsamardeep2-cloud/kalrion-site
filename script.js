@@ -32,6 +32,14 @@ const handleForm = (formId, noteId) => {
       event.preventDefault();
       const data = new FormData(form);
       note.textContent = "Opening WhatsApp with your enquiry details.";
+      
+      // Log Lead to CRM
+      if (window.logLead) {
+        const formName = formId === "quote-form" ? "Home Quote Request" : "Home Contact Form";
+        const details = Array.from(data.entries()).map(([k, v]) => `${k}: ${v}`).join(" | ");
+        window.logLead("Home Page", "Form Submit", `${formName} | ${details}`);
+      }
+
       window.location.href = buildWhatsAppUrl(data);
     });
   }
@@ -125,6 +133,15 @@ const setupHealthCalculator = () => {
       const cityText = document.getElementById('health-city').options[document.getElementById('health-city').selectedIndex].text;
       const cover = document.getElementById('health-recommended-cover').textContent;
       const breakdown = document.getElementById('health-cover-breakdown').textContent;
+
+      // Log Lead to CRM
+      if (window.logLead) {
+        window.logLead(
+          "Home Page - Health Cover Advisor",
+          "WhatsApp Click",
+          `Members: ${member} | Age Group: ${ageText} | City: ${cityText} | Recommended Cover: ${cover}`
+        );
+      }
 
       const text = [
         "Hi Kalrion Capital,",
@@ -230,6 +247,15 @@ const setupMotorCalculator = () => {
       const ncbText = document.getElementById('motor-ncb').options[document.getElementById('motor-ncb').selectedIndex].text;
       const bundle = document.getElementById('motor-recommended-title').textContent;
 
+      // Log Lead to CRM
+      if (window.logLead) {
+        window.logLead(
+          "Home Page - Motor Insurance Advisor",
+          "WhatsApp Click",
+          `Vehicle Age: ${ageText} | Zero Dep: ${zerodepVal} | NCB: ${ncbText} | Recommended: ${bundle}`
+        );
+      }
+
       const text = [
         "Hi Kalrion Capital,",
         "I configured my motor insurance add-ons on your website.",
@@ -259,4 +285,19 @@ document.addEventListener("DOMContentLoaded", () => {
   handleForm("contact-form", "contact-note");
   setupHealthCalculator();
   setupMotorCalculator();
+
+  // General Call & WhatsApp link logging
+  const logClick = (selector, action, label) => {
+    const els = document.querySelectorAll(selector);
+    els.forEach(el => {
+      el.addEventListener('click', () => {
+        if (window.logLead) {
+          window.logLead("Home Page", action, label);
+        }
+      });
+    });
+  };
+  logClick('.sticky-call', 'Call Click', 'Clicked sticky Call now button');
+  logClick('.sticky-whatsapp', 'WhatsApp Click', 'Clicked sticky WhatsApp enquiry button');
+  logClick('.header-cta', 'Call Click', 'Clicked Call now button in header');
 });

@@ -223,6 +223,15 @@ const setupBindings = () => {
       const interest = document.getElementById('res-interest').textContent;
       const total = document.getElementById('res-total').textContent;
 
+      // Log Lead to CRM
+      if (window.logLead) {
+        window.logLead(
+          "Loan EMI Calculator",
+          "WhatsApp Click",
+          `Type: ${typeText} | Amount: ${amount} | Rate: ${rate}% | Tenure: ${term} Years | EMI: ${emi}`
+        );
+      }
+
       const text = [
         "Hi Kalrion Capital,",
         `I am planning to apply for a *${typeText}* and used the EMI calculator on your website.`,
