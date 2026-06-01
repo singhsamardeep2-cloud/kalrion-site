@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gold Rate Tracker & 30-Year History | Kalrion Capital</title>
+    <meta
+      name="description"
+      content="Track daily simulated gold prices, analyze the 30-year historical gold rate chart in India, and calculate gold investment returns."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Kalrion home">
+        <img class="brand-logo" src="assets/kalrion-logo.png" alt="Kalrion Capital logo" />
+        <span>
+          <strong>Kalrion Capital</strong>
+          <small>Insurance | Loans | Demat</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html#health">Health</a>
+        <a href="index.html#motor">Motor</a>
+        <a href="loans.html">Loans</a>
+        <a href="sip.html">SIP Planner</a>
+        <a href="gold.html" class="active" style="color: #ffffff;">Gold Tracker</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <a class="header-cta" href="tel:+918447842244">Call now</a>
+    </header>
+
+    <main id="top">
+      <section class="page-banner">
+        <p class="eyebrow" style="color: var(--accent);">Alternative Assets</p>
+        <h1>Gold Rate Tracker</h1>
+        <p>
+          Analyze the 30-year historical gold rate trend in India (1996 - 2026) and compute long-term returns on physical, sovereign, and digital gold.
+        </p>
+      </section>
+
+      <section class="section" style="padding-top: 40px; padding-bottom: 40px;">
+        <!-- Daily Live Dashboard -->
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 30px;" id="gold-stats-grid">
+          <div class="about-points" style="display: block;">
+            <div style="padding: 16px 20px; background: var(--panel);">
+              <span style="font-size: 0.75rem; font-weight: 800; color: var(--muted); text-transform: uppercase;">24K Gold Rate (10g)</span>
+              <strong style="font-size: 1.8rem; color: var(--primary-dark); font-weight: 800; margin-top: 5px;">₹ 1,56,220</strong>
+              <small style="color: var(--error); font-weight: 700; font-size: 0.8rem; display: block; margin-top: 2px;">-0.52% Today</small>
+            </div>
+          </div>
+          <div class="about-points" style="display: block;">
+            <div style="padding: 16px 20px; background: var(--panel);">
+              <span style="font-size: 0.75rem; font-weight: 800; color: var(--muted); text-transform: uppercase;">22K Gold Rate (10g)</span>
+              <strong style="font-size: 1.8rem; color: var(--primary-dark); font-weight: 800; margin-top: 5px;">₹ 1,43,200</strong>
+              <small style="color: var(--error); font-weight: 700; font-size: 0.8rem; display: block; margin-top: 2px;">-0.52% Today</small>
+            </div>
+          </div>
+          <div class="about-points" style="display: block;">
+            <div style="padding: 16px 20px; background: var(--panel);">
+              <span style="font-size: 0.75rem; font-weight: 800; color: var(--muted); text-transform: uppercase;">30-Year Compounded Return</span>
+              <strong style="font-size: 1.8rem; color: var(--primary-dark); font-weight: 800; margin-top: 5px;">+2,963 %</strong>
+              <small style="color: var(--primary-light); font-weight: 700; font-size: 0.8rem; display: block; margin-top: 2px;">CAGR: ~12.1%</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live TradingView Chart Container -->
+        <div class="interactive-calculator/live-gold-tracker" style="margin-top: 0; margin-bottom: 40px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-md); overflow: hidden; display: flex; flex-direction: column;">
+          <div class="calc-header" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); padding: 24px 30px; border-bottom: 3px solid var(--accent); color: var(--panel);">
+            <h3 style="color: var(--accent-light); margin: 0 0 6px 0; font-size: 1.45rem; font-weight: 700; font-family: 'Outfit', sans-serif;">Live Gold Price Chart (Gold Spot Index)</h3>
+            <p style="margin: 0; color: #c9ded5; font-size: 0.9rem; font-weight: 500;">Real-time international gold spot price (USD per Troy Ounce) sourced from TradingView.</p>
+          </div>
+          <div class="calc-body" style="grid-template-columns: 1fr; padding: 24px; background: #ffffff;">
+            <div style="height: 400px; width: 100%;">
+              <!-- TradingView Widget BEGIN -->
+              <div class="tradingview-widget-container" style="height: 100%; width: 100%;">
+                <div id="tradingview_gold" style="height: 100%; width: 100%;"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                <script type="text/javascript">
+                  new TradingView.widget({
+                    "width": "100%",
+                    "height": "100%",
+                    "symbol": "TVC:GOLD",
+                    "interval": "D",
+                    "timezone": "Asia/Kolkata",
+                    "theme": "light",
+                    "style": "1",
+                    "locale": "en",
+                    "toolbar_bg": "#f1f3f6",
+                    "enable_publishing": false,
+                    "hide_side_toolbar": true,
+                    "allow_symbol_change": false,
+                    "container_id": "tradingview_gold",
+                    "studies": []
+                  });
+                </script>
+              </div>
+              <!-- TradingView Widget END -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 30-Year Chart Container -->
+        <div class="interactive-calculator" style="margin-top: 0;">
+          <div class="calc-header">
+            <h3>30-Year Gold Price Trend (INR per 10g of 24K Gold)</h3>
+            <p>Hover over the chart points to inspect average gold prices in India from 1996 to 2026.</p>
+          </div>
+          <div class="calc-body" style="grid-template-columns: 1fr; padding: 24px;">
+            <div class="chart-wrapper" style="max-height: 380px; height: 350px;">
+              <canvas id="goldChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Past Investment Return Calculator -->
+        <div class="interactive-calculator gold-return-calculator" style="margin-top: 40px;">
+          <div class="calc-header" style="background: linear-gradient(135deg, var(--accent-dark), var(--primary-dark));">
+            <h3>Gold Investment Return Calculator</h3>
+            <p>Find out what a historical investment in gold would be worth at today's rate.</p>
+          </div>
+          <div class="calc-body">
+            <div class="calc-inputs">
+              <!-- Investment Year -->
+              <div class="input-group">
+                <span class="input-label">Select Year of Investment</span>
+                <select id="gold-year" class="calc-select">
+                  <!-- Dynamically populated via JS -->
+                </select>
+              </div>
+
+              <!-- Investment Capital -->
+              <div class="input-group">
+                <span class="input-label">Investment Amount (₹)</span>
+                <div class="range-slider-wrapper">
+                  <input type="range" id="gold-amount-slider" min="1000" max="1000000" step="1000" value="10000" />
+                  <div class="slider-value-box">
+                    <input type="text" id="gold-amount-text" value="10,000" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Calculation Outputs -->
+            <div class="calc-results" style="background: var(--cream);">
+              <div class="result-card">
+                <span class="result-title">Value of Investment Today</span>
+                <div class="result-value" id="gold-current-value" style="color: var(--primary-dark);">₹ 3,06,314</div>
+                
+                <div class="result-breakdown" style="margin-bottom: 5px;">
+                  Initial Buying Price (10g): <span id="res-gold-buy-rate" style="color: var(--muted); font-weight: 700;">₹5,100</span>
+                </div>
+                <div class="result-breakdown" style="margin-bottom: 5px;">
+                  Gold Weight Purchased: <span id="res-gold-weight" style="color: var(--primary-light); font-weight: 700;">19.6 grams</span>
+                </div>
+                <div class="result-breakdown" style="margin-bottom: 15px;">
+                  Absolute Growth: <span id="res-gold-growth" style="color: var(--primary); font-weight: 800; font-size: 1.05rem;">+2,963% (CAGR: 12.1%)</span>
+                </div>
+
+                <button class="button primary calc-cta" id="gold-whatsapp-btn" style="background: var(--primary-dark);">
+                  Discuss Gold Investment Options on WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sovereign Gold Bonds Info -->
+        <div class="detail-panel" style="margin-top: 30px;">
+          <h3>Smart Alternatives: Sovereign Gold Bonds (SGBs) vs Physical Gold</h3>
+          <ul style="grid-template-columns: 1fr;">
+            <li><strong>Earn Interest:</strong> SGBs pay a guaranteed interest of 2.5% per annum on the initial investment, credited semi-annually, which physical gold cannot offer.</li>
+            <li><strong>Tax Free Capital Gains:</strong> SGB maturity values are 100% tax-free for individuals upon completing the 8-year term.</li>
+            <li><strong>Zero Storage Fees:</strong> Held securely in your demat account or RBI ledger, removing lockers or insurance worries.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Kalrion Capital</strong>
+        <p>Practical financial advisory, insurance, and lending guidance for Indian households.</p>
+      </div>
+      <p>
+        Gold asset rates are based on standard market rates in India and are subject to daily price fluctuations. Please consult a registered investment advisor before choosing SGB, digital gold, or physical bullion allocations. Add license or advisory disclosures here.
+      </p>
+    </footer>
+
+    <div class="sticky-actions" aria-label="Quick contact actions">
+      <a class="sticky-call" href="tel:+918447842244">Call now</a>
+      <a class="sticky-whatsapp" href="https://wa.me/918447842244">WhatsApp enquiry</a>
+    </div>
+
+    <script src="gold.js"></script>
+  </body>
+</html>

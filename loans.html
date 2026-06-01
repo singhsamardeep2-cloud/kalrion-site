@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loan EMI Calculator | Kalrion Capital</title>
+    <meta
+      name="description"
+      content="Calculate home, personal, and car loan EMIs with amortization schedules and get expert guidance on your loan applications."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Kalrion home">
+        <img class="brand-logo" src="assets/kalrion-logo.png" alt="Kalrion Capital logo" />
+        <span>
+          <strong>Kalrion Capital</strong>
+          <small>Insurance | Loans | Demat</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html#health">Health</a>
+        <a href="index.html#motor">Motor</a>
+        <a href="loans.html" class="active" style="color: #ffffff;">Loans</a>
+        <a href="sip.html">SIP Planner</a>
+        <a href="gold.html">Gold Tracker</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <a class="header-cta" href="tel:+918447842244">Call now</a>
+    </header>
+
+    <main id="top">
+      <section class="page-banner">
+        <p class="eyebrow" style="color: var(--accent);">Loans & Finance</p>
+        <h1>Loan EMI Calculator</h1>
+        <p>
+          Calculate your monthly payments, interest breakups, and amortization schedule for Home, Personal, or Car Loans instantly.
+        </p>
+      </section>
+
+      <section class="section" style="padding-top: 40px; padding-bottom: 40px;">
+        <div class="interactive-calculator loan-calculator" style="margin-top: 0;">
+          <div class="calc-header">
+            <h3>Configure Your Loan Options</h3>
+            <p>Adjust the sliders to see your monthly EMI, total interest payable, and principal breakdown.</p>
+          </div>
+          <div class="calc-body">
+            <div class="calc-inputs">
+              <!-- Loan Type Option Tiles -->
+              <div class="input-group">
+                <span class="input-label">Select Loan Type</span>
+                <div class="radio-tiles">
+                  <label class="tile-option">
+                    <input type="radio" name="loan-type" value="home" checked />
+                    <span class="tile-content">
+                      <strong class="tile-title">Home Loan</strong>
+                      <span class="tile-desc">Sleek rates (8.5% avg)</span>
+                    </span>
+                  </label>
+                  <label class="tile-option">
+                    <input type="radio" name="loan-type" value="car" />
+                    <span class="tile-content">
+                      <strong class="tile-title">Car Loan</strong>
+                      <span class="tile-desc">New/used vehicle</span>
+                    </span>
+                  </label>
+                  <label class="tile-option">
+                    <input type="radio" name="loan-type" value="personal" />
+                    <span class="tile-content">
+                      <strong class="tile-title">Personal Loan</strong>
+                      <span class="tile-desc">Collateral-free funds</span>
+                    </span>
+                  </label>
+                  <label class="tile-option">
+                    <input type="radio" name="loan-type" value="lap" />
+                    <span class="tile-content">
+                      <strong class="tile-title">Loan Against Property</strong>
+                      <span class="tile-desc">Cheapest mortgage rates</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Loan Amount Slider -->
+              <div class="input-group">
+                <span class="input-label">Loan Amount (₹)</span>
+                <div class="range-slider-wrapper">
+                  <input type="range" id="loan-amount-slider" min="100000" max="20000000" step="50000" value="5000000" />
+                  <div class="slider-value-box">
+                    <input type="text" id="loan-amount-text" value="50,00,000" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interest Rate Slider -->
+              <div class="input-group">
+                <span class="input-label">Interest Rate (% p.a.)</span>
+                <div class="range-slider-wrapper">
+                  <input type="range" id="loan-rate-slider" min="5" max="20" step="0.05" value="8.5" />
+                  <div class="slider-value-box">
+                    <input type="text" id="loan-rate-text" value="8.5" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Loan Tenure Slider -->
+              <div class="input-group">
+                <span class="input-label">Loan Tenure (Years)</span>
+                <div class="range-slider-wrapper">
+                  <input type="range" id="loan-term-slider" min="1" max="30" step="1" value="20" />
+                  <div class="slider-value-box">
+                    <input type="text" id="loan-term-text" value="20" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Calculation Results Card -->
+            <div class="calc-results">
+              <div class="result-card">
+                <span class="result-title">Monthly EMI</span>
+                <div class="result-value" id="loan-emi-value">₹ 43,391</div>
+                
+                <div class="result-breakdown" style="margin-bottom: 5px;">
+                  Principal Amount: <span id="res-principal" style="color: var(--primary-dark); font-weight: 700;">₹50,00,000</span>
+                </div>
+                <div class="result-breakdown" style="margin-bottom: 10px;">
+                  Total Interest Paid: <span id="res-interest" style="color: #AA820A; font-weight: 700;">₹54,13,879</span>
+                </div>
+                <div class="result-breakdown" style="border-top: 1px solid var(--line); padding-top: 10px; margin-bottom: 15px;">
+                  Total Payable: <span id="res-total" style="color: var(--primary); font-weight: 800;">₹1,04,13,879</span>
+                </div>
+
+                <!-- Doughnut Chart Container -->
+                <div class="chart-wrapper">
+                  <canvas id="loanChart"></canvas>
+                </div>
+
+                <button class="button primary calc-cta" id="loan-whatsapp-btn" style="margin-top: 15px;">
+                  Discuss Loan Eligibility on WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amortization Schedule Table -->
+        <div class="amortization-table-wrapper" id="amortization-schedule">
+          <h3>Yearly Amortization Schedule</h3>
+          <table class="amort-table">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Principal Paid (A)</th>
+                <th>Interest Paid (B)</th>
+                <th>Total Paid (A + B)</th>
+                <th>Ending Balance</th>
+              </tr>
+            </thead>
+            <tbody id="amort-table-body">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Kalrion Capital</strong>
+        <p>Practical financial advisory, insurance, and lending guidance for Indian households.</p>
+      </div>
+      <p>
+        Kalrion Capital provides lending facilitation and customer guidance. Loan disbursal is subject to credit check, bank approvals, KYC checks, legal audit, and verification. Please read loan agreements and interest terms carefully before signing. Add applicable partner/license details here.
+      </p>
+    </footer>
+
+    <div class="sticky-actions" aria-label="Quick contact actions">
+      <a class="sticky-call" href="tel:+918447842244">Call now</a>
+      <a class="sticky-whatsapp" href="https://wa.me/918447842244">WhatsApp enquiry</a>
+    </div>
+
+    <script src="loans.js"></script>
+  </body>
+</html>

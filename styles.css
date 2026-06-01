@@ -1214,3 +1214,126 @@ textarea {
   }
 }
 
+/* ==========================================================================
+   SUB-PAGE & FINANCIAL CALCULATOR UTILITIES
+   ========================================================================== */
+.page-banner {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  color: white;
+  padding: clamp(40px, 6vw, 70px) clamp(18px, 5vw, 72px);
+  text-align: center;
+  border-bottom: 4px solid var(--accent);
+}
+
+.page-banner h1 {
+  color: var(--accent-light);
+  margin: 0 auto 12px auto;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+}
+
+.page-banner p {
+  margin: 0 auto;
+  max-width: 720px;
+  color: #d1ece0;
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+}
+
+.range-slider-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 8px;
+}
+
+.range-slider-wrapper input[type="range"] {
+  flex: 1;
+  height: 6px;
+  background: var(--line);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.range-slider-wrapper input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2.5px solid var(--accent);
+  box-shadow: 0 2px 6px rgba(10, 77, 52, 0.25);
+  transition: var(--transition);
+}
+
+.range-slider-wrapper input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: var(--primary-light);
+}
+
+.range-slider-wrapper .slider-value-box {
+  width: 110px;
+  min-width: 110px;
+  text-align: right;
+}
+
+.range-slider-wrapper .slider-value-box input {
+  text-align: right;
+  font-weight: 700;
+  color: var(--primary-dark);
+  border-color: var(--line);
+  padding: 8px 10px;
+  min-height: auto;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  max-height: 280px;
+  margin: 20px auto 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.amortization-table-wrapper {
+  margin-top: 40px;
+  overflow-x: auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+}
+
+.amortization-table-wrapper h3 {
+  color: var(--primary-dark);
+  margin-bottom: 16px;
+}
+
+.amort-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.amort-table th, 
+.amort-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.amort-table th {
+  background: var(--cream);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.amort-table tr:hover td {
+  background: #fbfcfb;
+}
+
+

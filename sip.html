@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SIP Growth Calculator | Kalrion Capital</title>
+    <meta
+      name="description"
+      content="Calculate the future value of your Mutual Fund SIP investments with compounding growth curves and expert wealth guidance."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Kalrion home">
+        <img class="brand-logo" src="assets/kalrion-logo.png" alt="Kalrion Capital logo" />
+        <span>
+          <strong>Kalrion Capital</strong>
+          <small>Insurance | Loans | Demat</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html#health">Health</a>
+        <a href="index.html#motor">Motor</a>
+        <a href="loans.html">Loans</a>
+        <a href="sip.html" class="active" style="color: #ffffff;">SIP Planner</a>
+        <a href="gold.html">Gold Tracker</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <a class="header-cta" href="tel:+918447842244">Call now</a>
+    </header>
+
+    <main id="top">
+      <section class="page-banner">
+        <p class="eyebrow" style="color: var(--accent);">Mutual Funds & SIP</p>
+        <h1>SIP Growth Calculator</h1>
+        <p>
+          See how regular monthly investments compile into major wealth over time using compound interest curves.
+        </p>
+      </section>
+
+      <section class="section" style="padding-top: 40px; padding-bottom: 40px;">
+        <div class="interactive-calculator sip-calculator" style="margin-top: 0;">
+          <div class="calc-header">
+            <h3>Configure Your SIP Investment</h3>
+            <p>Select your monthly SIP amount, expected rate of return, and tenure to visualize your future wealth.</p>
+          </div>
+          <div class="calc-body">
+            <div class="calc-inputs">
+              <!-- Monthly Investment -->
+              <div class="input-group">
+                <span class="input-label">Monthly Investment (₹)</span>
+                <div class="range-slider-wrapper">
+                  <input type="range" id="sip-amount-slider" min="500" max="100000" step="500" value="10000" />
+                  <div class="slider-value-box">
+                    <input type="text" id="sip-amount-text" value="10,000" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Return Rate -->
+              <div class="input-group">
+                <span class="input-label">Expected Return Rate (% p.a.)</span>
+                <div class="range-slider-wrapper">
+                  <input type="range" id="sip-rate-slider" min="5" max="30" step="0.5" value="12" />
+                  <div class="slider-value-box">
+                    <input type="text" id="sip-rate-text" value="12" />
+                  </div>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 8px;">
+                  <button class="button secondary" style="min-height: auto; padding: 4px 8px; font-size: 0.75rem;" onclick="setSIPRate(12)">12% (Conservative)</button>
+                  <button class="button secondary" style="min-height: auto; padding: 4px 8px; font-size: 0.75rem;" onclick="setSIPRate(15)">15% (Aggressive)</button>
+                  <button class="button secondary" style="min-height: auto; padding: 4px 8px; font-size: 0.75rem;" onclick="setSIPRate(18)">18% (High Growth)</button>
+                </div>
+              </div>
+
+              <!-- Tenure -->
+              <div class="input-group">
+                <span class="input-label">Time Period (Years)</span>
+                <div class="range-slider-wrapper">
+                  <input type="range" id="sip-term-slider" min="1" max="30" step="1" value="15" />
+                  <div class="slider-value-box">
+                    <input type="text" id="sip-term-text" value="15" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Calculation Results Card -->
+            <div class="calc-results">
+              <div class="result-card">
+                <span class="result-title">Future Wealth Value</span>
+                <div class="result-value" id="sip-total-value">₹ 50,45,760</div>
+                
+                <div class="result-breakdown" style="margin-bottom: 5px;">
+                  Invested Capital: <span id="res-sip-invested" style="color: var(--primary-dark); font-weight: 700;">₹18,00,000</span>
+                </div>
+                <div class="result-breakdown" style="margin-bottom: 15px;">
+                  Estimated Wealth Gain: <span id="res-sip-gain" style="color: var(--primary); font-weight: 800; font-size: 1.05rem;">₹32,45,760</span>
+                </div>
+
+                <!-- Growth Curve Chart Container -->
+                <div class="chart-wrapper" style="max-height: 250px;">
+                  <canvas id="sipChart"></canvas>
+                </div>
+
+                <button class="button primary calc-cta" id="sip-whatsapp-btn" style="margin-top: 15px;">
+                  Discuss SIP Shortlists on WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Compounding Tips Panel -->
+        <div class="detail-panel" style="margin-top: 30px;">
+          <h3>Compounding Insight for Smart Investors</h3>
+          <ul style="grid-template-columns: 1fr;">
+            <li><strong>Power of Time:</strong> Notice how in the later years (10+ years), your wealth gain becomes substantially larger than your invested capital. This is the compound interest curve in action!</li>
+            <li><strong>Step-Up SIP:</strong> Consider increasing your SIP amount by 5-10% every year as your salary increases to reach your financial goals twice as fast.</li>
+            <li><strong>Equity vs Debt:</strong> Long-term equity SIPs in India have historically delivered averages of 12-15% CAGR, whereas debt funds average 6-8%.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Kalrion Capital</strong>
+        <p>Practical financial advisory, insurance, and lending guidance for Indian households.</p>
+      </div>
+      <p>
+        Mutual Fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Historical returns are not indicators of future performances. Add applicable registration/ARN disclosures here.
+      </p>
+    </footer>
+
+    <div class="sticky-actions" aria-label="Quick contact actions">
+      <a class="sticky-call" href="tel:+918447842244">Call now</a>
+      <a class="sticky-whatsapp" href="https://wa.me/918447842244">WhatsApp enquiry</a>
+    </div>
+
+    <script src="sip.js"></script>
+  </body>
+</html>
