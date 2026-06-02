@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
 
 :root {
   /* Brand Colors */
@@ -80,11 +80,7 @@ img {
 .brand-logo {
   width: 54px;
   height: 44px;
-  object-fit: contain;
-  background: #ffffff;
-  border-radius: var(--radius-sm);
-  padding: 2px;
-  box-shadow: var(--shadow-sm);
+  display: block;
 }
 
 .brand strong,
@@ -290,12 +286,15 @@ h3 {
   min-width: 0;
 }
 
-.hero-panel img {
+.hero-panel img,
+.hero-panel svg.hero-svg {
   width: 100%;
+  height: auto;
   background: #ffffff;
   border: 2px solid var(--accent);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
+  display: block;
 }
 
 .advisor-note {
