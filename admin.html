@@ -217,6 +217,15 @@
           </div>
         </div>
 
+        <!-- Admin navigation tabs -->
+        <div class="admin-tabs">
+          <button class="admin-tab-btn active" onclick="switchAdminTab('leads-tab')">📊 Enquiry Feed</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('marketing-tab')">💡 AI Marketing Hub</button>
+        </div>
+
+        <!-- Tab 1: Enquiry Feed -->
+        <div id="leads-tab" class="tab-content-panel active">
+
         <!-- Metrics summary row -->
         <div class="admin-metrics">
           <div class="admin-metrics-card">
@@ -261,12 +270,14 @@
                 <option value="SIP Growth Planner">SIP Page</option>
                 <option value="Gold Tracker">Gold Page</option>
                 <option value="Tax Planner">Tax Page</option>
+                <option value="Book Shop">Book Shop</option>
               </select>
               <select id="crm-action-filter" class="crm-filter-input">
                 <option value="all">All Actions</option>
                 <option value="WhatsApp Click">WhatsApp Click</option>
                 <option value="Call Click">Call Click</option>
                 <option value="Form Submit">Form Submit</option>
+                <option value="Order Placed">Order Placed</option>
               </select>
             </div>
 
@@ -312,6 +323,48 @@
           </div>
 
         </div>
+        </div> <!-- End of Tab 1 Leads Tab -->
+
+        <!-- Tab 2: AI Marketing Factory -->
+        <div id="marketing-tab" class="tab-content-panel">
+          <div class="marketing-grid">
+            <div class="marketing-header-row">
+              <div>
+                <h3 style="margin: 0; font-family: 'Outfit', sans-serif; color: var(--primary-dark); font-size: 1.25rem;">AI Marketing Script Factory</h3>
+                <p style="margin: 2px 0 0 0; color: var(--muted); font-size: 0.82rem;">Copy viral, pre-written Hinglish scripts and social posts to get customers for your tools.</p>
+              </div>
+              <div>
+                <select id="marketing-tool-select" class="crm-filter-input" style="min-width: 220px;" aria-label="Select calculator script category">
+                  <option value="loans">🏠 Home/Car Loan Script</option>
+                  <option value="sip">📈 Mutual Fund SIP Script</option>
+                  <option value="tax">📊 Income Tax Slabs Script</option>
+                  <option value="gold">🏆 Gold CAGR Growth Script</option>
+                  <option value="shop">📚 Book Shop Promotion Script</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="marketing-cards-container">
+              <!-- Script 1: Hinglish Reel -->
+              <div class="script-card">
+                <h4 style="font-size: 0.95rem;">🎥 Hinglish Instagram Reel Script <button class="button secondary" style="min-height: auto; padding: 3px 8px; font-size: 0.72rem;" onclick="copyScriptText('reel-script-container')">Copy</button></h4>
+                <div class="script-content" id="reel-script-container">Loading reel template...</div>
+              </div>
+
+              <!-- Script 2: LinkedIn Value Post -->
+              <div class="script-card">
+                <h4 style="font-size: 0.95rem;">💼 Professional LinkedIn Post <button class="button secondary" style="min-height: auto; padding: 3px 8px; font-size: 0.72rem;" onclick="copyScriptText('linkedin-script-container')">Copy</button></h4>
+                <div class="script-content" id="linkedin-script-container">Loading post template...</div>
+              </div>
+
+              <!-- Script 3: WhatsApp Broadcast -->
+              <div class="script-card">
+                <h4 style="font-size: 0.95rem;">💬 WhatsApp Group Broadcast <button class="button secondary" style="min-height: auto; padding: 3px 8px; font-size: 0.72rem;" onclick="copyScriptText('whatsapp-script-container')">Copy</button></h4>
+                <div class="script-content" id="whatsapp-script-container">Loading broadcast template...</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </section>
 
@@ -323,6 +376,34 @@
         <p>Internal CRM Admin panel. Secure data access only.</p>
       </div>
     </footer>
+
+    <!-- Outreach Modal Overlay -->
+    <div class="admin-modal-overlay" id="reply-modal">
+      <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="admin-modal-header">
+          <h3 id="modal-title">💬 Auto Outreach Draft</h3>
+          <button class="admin-modal-close" onclick="closeReplyModal()" aria-label="Close modal">&times;</button>
+        </div>
+        <div class="admin-modal-body">
+          <div class="outreach-meta">
+            <p><strong>Customer:</strong> <span id="outreach-cust-name">N/A</span></p>
+            <p><strong>Channel Source:</strong> <span id="outreach-cust-source">N/A</span></p>
+            <p><strong>Contact Phone:</strong> <span id="outreach-cust-phone">N/A</span></p>
+          </div>
+          <div class="input-group" style="display: block; margin-bottom: 16px;">
+            <label class="input-label" for="outreach-msg-text">Outreach Message Script</label>
+            <textarea id="outreach-msg-text" class="cart-input" style="height: 160px; resize: none; font-family: inherit; font-size: 0.85rem; line-height: 1.45;" placeholder="Generating draft..."></textarea>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <button class="button secondary" style="flex: 1;" onclick="copyOutreachText()">📋 Copy Text</button>
+            <button class="button primary" style="flex: 1.2; background: var(--success); border-color: var(--success);" id="outreach-wa-btn">💬 Send on WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast container for notifications -->
+    <div class="toast-container" id="toast-container"></div>
 
     <script src="crm-logger.js"></script>
     <script src="admin.js"></script>

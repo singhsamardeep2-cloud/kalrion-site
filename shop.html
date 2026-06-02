@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Investing & Stock Market Book Shop | Kalrion Capital</title>
+    <meta
+      name="description"
+      content="Curated books on value investing, stock market trading, financial psychology, and wealth creation. Order directly via WhatsApp."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Kalrion home">
+        <img class="brand-logo" src="assets/kalrion-logo.svg" alt="Kalrion Capital logo" />
+        <span>
+          <strong>Kalrion Capital</strong>
+          <small>Insurance | Loans | Demat</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html#health">Health</a>
+        <a href="index.html#motor">Motor</a>
+        <a href="loans.html">Loans</a>
+        <a href="sip.html">SIP Planner</a>
+        <a href="gold.html">Gold Tracker</a>
+        <a href="tax.html">Tax Planner</a>
+        <a href="shop.html" class="active" style="color: #ffffff;">Shop</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <a class="header-cta" href="tel:+918447842244">Call now</a>
+    </header>
+
+    <main class="page-container" style="max-width: 1200px; margin: 40px auto; padding: 0 20px; box-sizing: border-box;">
+      
+      <!-- Shop Hero Section -->
+      <section class="shop-hero">
+        <p class="eyebrow" style="color: var(--accent); text-transform: uppercase; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.08em; margin-bottom: 8px;">Curated Wealth Literature</p>
+        <h1>Investor's Knowledge Hub</h1>
+        <p>
+          Gain an edge in the markets with our handpicked selection of top-tier books on investing strategy, trading analysis, and the psychology of money.
+        </p>
+      </section>
+
+      <!-- Shop controls toolbar -->
+      <section class="shop-toolbar">
+        <div class="shop-filters" id="category-filters">
+          <button class="filter-btn active" data-category="all">All Books</button>
+          <button class="filter-btn" data-category="Investing">Value Investing</button>
+          <button class="filter-btn" data-category="Trading">Trading & Technicals</button>
+          <button class="filter-btn" data-category="Psychology">Psychology & Finance</button>
+        </div>
+        <div class="shop-sort">
+          <select id="price-sort" aria-label="Sort books by price">
+            <option value="default">Sort by: Relevance</option>
+            <option value="low-high">Price: Low to High</option>
+            <option value="high-low">Price: High to Low</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Shop Book Grid -->
+      <section class="product-grid" id="book-grid">
+        <!-- Dynamically populated via JS -->
+      </section>
+
+    </main>
+
+    <!-- Floating Shopping Cart Trigger Button -->
+    <div class="cart-trigger-btn" id="cart-trigger" aria-label="Open shopping cart">
+      🛒
+      <span class="cart-count-badge" id="cart-badge-count">0</span>
+    </div>
+
+    <!-- Sliding Cart Drawer Overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <!-- Sliding Cart Drawer Panel -->
+    <div class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Your shopping cart">
+      <div class="cart-header">
+        <h3>🛒 Order Cart</h3>
+        <button class="cart-close-btn" id="cart-close-btn" aria-label="Close cart">&times;</button>
+      </div>
+      <div class="cart-body">
+        <div class="cart-empty-state" id="cart-empty-msg">
+          <p style="font-size: 3rem; margin-bottom: 10px;">📚</p>
+          <p style="font-weight: 600;">Your cart is currently empty</p>
+          <p style="font-size: 0.85rem; color: var(--muted); margin-top: 5px;">Add curated books from our store to start building your library.</p>
+        </div>
+
+        <div id="cart-items-container" style="display: none; flex-grow: 1; display: flex; flex-direction: column;">
+          <!-- List of items in cart -->
+          <div class="cart-items-list" id="cart-items-list">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Checkout & Bill Summary -->
+          <div class="checkout-section">
+            <div class="bill-summary">
+              <div class="bill-row">
+                <span>Subtotal</span>
+                <span id="bill-subtotal">₹0</span>
+              </div>
+              <div class="bill-row">
+                <span>GST (18%)</span>
+                <span id="bill-tax">₹0</span>
+              </div>
+              <div class="bill-row">
+                <span>Delivery Charges</span>
+                <span style="color: var(--success); font-weight: 700;">FREE</span>
+              </div>
+              <div class="bill-row total">
+                <span>Total Amount</span>
+                <span id="bill-total">₹0</span>
+              </div>
+            </div>
+
+            <!-- Shipping Information Form -->
+            <form id="checkout-form" class="checkout-form-container">
+              <h4>Shipping Details</h4>
+              <input type="text" id="cust-name" class="cart-input" placeholder="Full Name" required />
+              <input type="tel" id="cust-phone" class="cart-input" placeholder="Mobile Number (WhatsApp)" required pattern="[0-9]{10}" title="Ten digit mobile number" />
+              <input type="email" id="cust-email" class="cart-input" placeholder="Email Address" required />
+              <textarea id="cust-address" class="cart-input" placeholder="Complete Delivery Address (with PIN Code)" style="height: 70px; resize: none; font-family: inherit;" required></textarea>
+              <button type="submit" class="button primary" style="width: 100%; margin-top: 10px; background: var(--primary-dark);">Place Order via WhatsApp</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast container for notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <footer class="site-footer" style="margin-top: 80px;">
+      <div class="footer-cols">
+        <div>
+          <strong>Kalrion Capital</strong>
+          <p>Practical financial advisory, insurance, lending, and knowledge resources for Indian households.</p>
+          <p style="margin-top: 15px; font-size: 0.8rem;"><a href="admin.html" style="color: var(--accent); text-decoration: underline; opacity: 0.8; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">Admin Console</a></p>
+        </div>
+        <nav aria-label="Footer navigation">
+          <strong>Useful links</strong>
+          <a href="index.html#health">Health Advisor</a>
+          <a href="index.html#motor">Motor Advisor</a>
+          <a href="loans.html">Loans Calculator</a>
+          <a href="sip.html">SIP Planner</a>
+          <a href="gold.html">Gold Tracker</a>
+          <a href="tax.html">Tax Planner</a>
+          <a href="shop.html">Book Shop</a>
+        </nav>
+        <div>
+          <strong>Disclaimer</strong>
+          <p>
+            Kalrion Capital facilitates financial literature and tools for education. Book order transactions are finalized directly with clients via WhatsApp. Disbursal and advisory are governed by regional banking and licensing guidelines.
+          </p>
+        </div>
+      </div>
+      <p class="copyright">© 2026 Kalrion Capital. Designed for secure personal advisory guidelines.</p>
+    </footer>
+
+    <script src="crm-logger.js"></script>
+    <script src="shop.js"></script>
+  </body>
+</html>
